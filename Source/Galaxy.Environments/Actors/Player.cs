@@ -32,7 +32,7 @@ namespace Galaxy.Environments.Actors
 
     public override void Load()
     {
-      Load(@"Assets\player.png");
+        Load(@"Assets\Nevskiy.png");
     }
 
     #region Overrides of DethAnimationActor
