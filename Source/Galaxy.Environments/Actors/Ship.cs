@@ -39,6 +39,7 @@ namespace Galaxy.Environments.Actors
 
     #endregion
 
+
     #region Overrides
 
     public override void Update()
@@ -109,4 +110,14 @@ namespace Galaxy.Environments.Actors
 
     #endregion
   }
+
+    public class Ships111 : Ship
+    {
+        public Ships111(ILevelInfo info) : base(info)
+        {
+            Width = Width+25;
+            Height = Height + 25;
+            ActorType = ActorType.Enemy;
+        }
+    }
 }

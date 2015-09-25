@@ -32,7 +32,7 @@ namespace Galaxy.Environments
       // Enemies
       for (int i = 0; i < 5; i++)
       {
-        var ship = new Ship(this);
+        var ship = new Ships111(this);
         int positionY = ship.Height + 10;
         int positionX = 150 + i * (ship.Width + 50);
 
