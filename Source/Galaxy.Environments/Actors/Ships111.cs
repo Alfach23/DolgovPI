@@ -13,6 +13,11 @@ namespace Galaxy.Environments.Actors
             ActorType = ActorType.Enemy;
         }
 
+        public override void Update()
+        {
+            base.Update();
+            EnemyBullet enemyBullet = new EnemyBullet(Info);
+        }
         public override void Load()
         {
             InitTimer();

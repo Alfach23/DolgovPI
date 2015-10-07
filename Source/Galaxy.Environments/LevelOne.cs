@@ -1,5 +1,6 @@
 ﻿#region using
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -77,6 +78,11 @@ namespace Galaxy.Environments
     {
       m_frameCount++;
       h_dispatchKey();
+
+        int i = new  Random().Next(Actors.Count);
+        Bullet bullet = new Bullet(this);
+        bullet.Position = Actors[i].Position;
+        Actors.Add(bullet);
 
       base.Update();
 

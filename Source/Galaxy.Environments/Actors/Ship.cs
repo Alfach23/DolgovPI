@@ -71,14 +71,19 @@ namespace Galaxy.Environments.Actors
     public override void Load()
     {
         Load(@"Assets\ship.png");
-      if (m_flyTimer == null)
-      {
-        m_flyTimer = new Stopwatch();
-        m_flyTimer.Start();
-      }
+        InitTimer();
     }
 
-    #endregion
+      protected void InitTimer()
+      {
+          if (m_flyTimer == null)
+          {
+              m_flyTimer = new Stopwatch();
+              m_flyTimer.Start();
+          }
+      }
+
+      #endregion
 
     #region Private methods
 
@@ -110,14 +115,4 @@ namespace Galaxy.Environments.Actors
 
     #endregion
   }
-
-    public class Ships111 : Ship
-    {
-        public Ships111(ILevelInfo info) : base(info)
-        {
-            Width = Width+25;
-            Height = Height + 25;
-            ActorType = ActorType.Enemy;
-        }
-    }
 }
