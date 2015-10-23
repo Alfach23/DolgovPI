@@ -118,7 +118,19 @@ namespace Galaxy.Core.Environment
             return Size;
         }
 
+        public Point GetShipPosition()
+        {
+            return Ship.Position;
+        }
+
+        public void AddBullet(BaseActor pEnemyBullet)
+        {
+            
+        }
+
         protected BaseActor Player { get; set; }
+
+        protected BaseActor Ship { get; set; }
 
         #endregion
     }

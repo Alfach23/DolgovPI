@@ -33,13 +33,13 @@ namespace Galaxy.Environments
       // Enemies
       for (int i = 0; i < 5; i++)
       {
-        var ship = new Ships111(this);
-        int positionY = ship.Height + 10;
-        int positionX = 150 + i * (ship.Width + 50);
+        Ship = new Ships111(this);
+        int positionY = Ship.Height + 10;
+        int positionX = 150 + i * (Ship.Width + 50);
 
-        ship.Position = new Point(positionX, positionY);
+        Ship.Position = new Point(positionX, positionY);
 
-        Actors.Add(ship);
+        Actors.Add(Ship);
       }
 
       // Player
@@ -64,9 +64,17 @@ namespace Galaxy.Environments
       {
         Position = Player.Position
       };
-
+        
       bullet.Load();
       Actors.Add(bullet);
+
+      //enemyBullet
+      //EnemyBullet enemyBullet = new EnemyBullet(this)
+      //{
+      //    Position = Ship.Position
+      //};
+      //enemyBullet.Load();
+      //Actors.Add(enemyBullet);
     }
 
     public override BaseLevel NextLevel()
