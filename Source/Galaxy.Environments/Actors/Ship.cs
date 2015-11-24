@@ -21,6 +21,17 @@ namespace Galaxy.Environments.Actors
 
     #endregion
 
+      public EnemyBullet CreateBullet()
+      {
+          EnemyBullet enemyBullet = new EnemyBullet(Info);
+          {
+              Position = Position;
+          };
+
+          enemyBullet.Load();
+          return enemyBullet;
+      }
+
     #region Private fields
 
     private bool m_flying;
@@ -45,6 +56,7 @@ namespace Galaxy.Environments.Actors
     public override void Update()
     {
       base.Update();
+        CreateBullet();
 
       if (!IsAlive)
         return;

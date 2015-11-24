@@ -3,6 +3,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Windows.Forms;
 using Galaxy.Core.Environment;
 
 #endregion
@@ -57,7 +58,17 @@ namespace Galaxy.Core.Actors
 
     public virtual void Draw(Graphics g)
     {
-      g.DrawImage(Image, Position.X, Position.Y);
+        try
+        {
+            g.DrawImage(Image, Position.X, Position.Y);
+        }
+        catch (Exception expException)
+        {
+            MessageBox.Show(expException.Message);
+        }
+           
+
+      
     }
 
     public abstract void Load();

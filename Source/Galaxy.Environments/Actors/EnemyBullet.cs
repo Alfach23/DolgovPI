@@ -9,7 +9,7 @@ using Galaxy.Core.Environment;
 
 namespace Galaxy.Environments.Actors
 {
-    class EnemyBullet : BaseActor
+    public class EnemyBullet : BaseActor
   {
     #region Constant
 
@@ -32,7 +32,7 @@ namespace Galaxy.Environments.Actors
 
     public override void Load()
     {
-      Load(@"Assets\bullet.png");
+        Load(@"Assets\enemyBullet.png");
     }
 
     public override void Update()

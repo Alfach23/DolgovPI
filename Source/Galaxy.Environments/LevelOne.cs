@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using Galaxy.Core.Actors;
@@ -34,6 +35,7 @@ namespace Galaxy.Environments
       for (int i = 0; i < 5; i++)
       {
         Ship = new Ships111(this);
+          Ship.Load();
         int positionY = Ship.Height + 10;
         int positionX = 150 + i * (Ship.Width + 50);
 
@@ -65,16 +67,8 @@ namespace Galaxy.Environments
         Position = Player.Position
       };
         
-      bullet.Load();
+      //bullet.Load();
       Actors.Add(bullet);
-
-      //enemyBullet
-      //EnemyBullet enemyBullet = new EnemyBullet(this)
-      //{
-      //    Position = Ship.Position
-      //};
-      //enemyBullet.Load();
-      //Actors.Add(enemyBullet);
     }
 
     public override BaseLevel NextLevel()
@@ -86,9 +80,11 @@ namespace Galaxy.Environments
     {
       m_frameCount++;
       h_dispatchKey();
+        TimeEnemyBul();
 
         int i = new  Random().Next(Actors.Count);
         Bullet bullet = new Bullet(this);
+        bullet.Load();
         bullet.Position = Actors[i].Position;
         Actors.Add(bullet);
 
@@ -118,6 +114,32 @@ namespace Galaxy.Environments
       if (Actors.All(actor => actor.ActorType != ActorType.Enemy))
         Success = true;
     }
+      //таймер
+    //создать таймер, который будет выполнять проверку по времени.
+    private Stopwatch BullShotTime = new Stopwatch();
+      private void TimeEnemyBul()
+      {
+          
+          if (BullShotTime.ElapsedMilliseconds < 5000)
+              return;
+
+          var enemyBullet = new EnemyBullet(this);
+          var enemyList = Actors.Where((actor) => actor is Ship || actor is Ships111).ToList();
+          if (enemyList.Count > 0)
+          {
+              Random rnd = new Random();
+              int qq = rnd.Next(enemyList.Count);
+
+              var target = enemyList[qq].Position;
+              enemyBullet.Position = new Point(target.X, target.Y + 10);
+
+              enemyBullet.Load();
+
+              Actors.Add(enemyBullet);
+
+              BullShotTime.Restart();
+          }
+      }
 
     #endregion
   }
