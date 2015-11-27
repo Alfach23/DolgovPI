@@ -82,11 +82,11 @@ namespace Galaxy.Environments
       h_dispatchKey();
         TimeEnemyBul();
 
-        int i = new  Random().Next(Actors.Count);
-        Bullet bullet = new Bullet(this);
-        bullet.Load();
-        bullet.Position = Actors[i].Position;
-        Actors.Add(bullet);
+        //int i = new  Random().Next(Actors.Count);
+        //Bullet bullet = new Bullet(this);
+        //bullet.Load();
+        //bullet.Position = Actors[i].Position;
+        //Actors.Add(bullet);
 
       base.Update();
 

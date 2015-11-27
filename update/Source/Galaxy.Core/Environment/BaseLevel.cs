@@ -61,7 +61,7 @@ namespace Galaxy.Core.Environment
       }
     }
 
-    public void Load()
+    public virtual void Load()
     {
       h_load();
 
@@ -115,6 +115,10 @@ namespace Galaxy.Core.Environment
       return Size;
     }
 
+      public void AddBullet(BaseActor pEnemyBullet)
+      {
+          Actors.Add(pEnemyBullet);
+      }
     protected BaseActor Player { get; set; }
 
     #endregion
