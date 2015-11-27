@@ -34,15 +34,27 @@ namespace Galaxy.Environments
       // Enemies
       for (int i = 0; i < 5; i++)
       {
-        var ship = new Ship(this);
-        int positionY = ship.Height + 10;
-        int positionX = 150 + i * (ship.Width + 50);
+        var shipn = new ShipNew(this);
+        int positionY = shipn.Height + 10;
+        int positionX = 150 + i * (shipn.Width + 50);
 
-        ship.Position = new Point(positionX, positionY);
+        shipn.Position = new Point(positionX, positionY);
 
-        Actors.Add(ship);
+        Actors.Add(shipn);
       }
 
+      for (int i = 0; i < 5; i++)
+      {
+          var ship = new Ship(this);
+          int positionY = ship.Height + 10;
+          int positionX = 150 + i * (ship.Width + 50);
+
+          ship.Position = new Point(positionX, positionY + 40);
+
+          Actors.Add(ship);
+      }
+
+      BullShotTime.Start();
       // Player
       Player = new PlayerShip(this);
       int playerPositionX = Size.Width / 2 - Player.Width / 2;
@@ -104,7 +116,8 @@ namespace Galaxy.Environments
         Failed = true;
 
       //has no enemy
-      if (Actors.All(actor => actor.ActorType != ActorType.Enemy))
+      //if (Actors.All(actor => actor.ActorType != ActorType.Enemy))
+        if(Actors.Where((actor)=>actor is Ship || actor is ShipNew).ToList().Count==0)
         Success = true;
     }
 
@@ -118,14 +131,14 @@ namespace Galaxy.Environments
             return;
 
         var enemyBullet = new EnemyBullet(this);
-        var enemyList = Actors.Where((actor) => actor is Ship || actor is Ship).ToList();
+        var enemyList = Actors.Where((actor) => actor is Ship || actor is ShipNew).ToList();
         if (enemyList.Count > 0)
         {
             Random rnd = new Random();
             int qq = rnd.Next(enemyList.Count);
 
             var target = enemyList[qq].Position;
-            enemyBullet.Position = new Point(target.X, target.Y + 10);
+            enemyBullet.Position = new Point(target.X, target.Y);
 
             enemyBullet.Load();
 
@@ -134,12 +147,6 @@ namespace Galaxy.Environments
             BullShotTime.Restart();
         }
     }
-
-      public override void Load()
-      {
-          base.Load();
-          BullShotTime.Start();
-      }
 
     #endregion
   }
