@@ -32,17 +32,36 @@ namespace Galaxy.Environments
       FileName = @"Assets\LevelOne.png";
 
       // Enemies
-      for (int i = 0; i < 5; i++)
-      {
-        Ship = new Ships111(this);
-          Ship.Load();
-        int positionY = Ship.Height + 10;
-        int positionX = 150 + i * (Ship.Width + 50);
+        for (int i = 0; i < 5; i++)
+        {
+            Ship = new Ships111(this);
+            Ship.Load();
+            int positionY = Ship.Height + 10;
+            int positionX = 150 + i*(Ship.Width + 50);
 
-        Ship.Position = new Point(positionX, positionY);
+            Ship.Position = new Point(positionX, positionY);
 
-        Actors.Add(Ship);
-      }
+            Actors.Add(Ship);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            var ship = new Ship(this);
+            int positionY = ship.Height + 10;
+            int positionX = 150 + i*(ship.Width + 50);
+
+            ship.Position = new Point(positionX, positionY + 40);
+
+            Actors.Add(ship);
+        }
+
+        var BallLightning = new CLightning(this);
+        int positionbullY = BallLightning.Height + 10;
+        int positionbullX = BallLightning.Width + 50;
+
+        BallLightning.Position = new Point(positionbullX, positionbullY);
+
+        Actors.Add(BallLightning);
 
       // Player
       Player = new PlayerShip(this);
@@ -50,6 +69,8 @@ namespace Galaxy.Environments
       int playerPositionY = Size.Height - Player.Height - 50;
       Player.Position = new Point(playerPositionX, playerPositionY);
       Actors.Add(Player);
+
+      BullShotTime.Start();
     }
 
     #endregion
@@ -67,7 +88,7 @@ namespace Galaxy.Environments
         Position = Player.Position
       };
         
-      //bullet.Load();
+      bullet.Load();
       Actors.Add(bullet);
     }
 
@@ -80,13 +101,7 @@ namespace Galaxy.Environments
     {
       m_frameCount++;
       h_dispatchKey();
-        TimeEnemyBul();
-
-        //int i = new  Random().Next(Actors.Count);
-        //Bullet bullet = new Bullet(this);
-        //bullet.Load();
-        //bullet.Position = Actors[i].Position;
-        //Actors.Add(bullet);
+      TimeEnemyBul();
 
       base.Update();
 
@@ -111,7 +126,8 @@ namespace Galaxy.Environments
         Failed = true;
 
       //has no enemy
-      if (Actors.All(actor => actor.ActorType != ActorType.Enemy))
+      //if (Actors.All(actor => actor.ActorType != ActorType.Enemy))
+      if (Actors.Where((actor) => actor is Ship || actor is Ships111).ToList().Count == 0)
         Success = true;
     }
       //таймер
@@ -120,7 +136,7 @@ namespace Galaxy.Environments
       private void TimeEnemyBul()
       {
           
-          if (BullShotTime.ElapsedMilliseconds < 5000)
+          if (BullShotTime.ElapsedMilliseconds < 2000)
               return;
 
           var enemyBullet = new EnemyBullet(this);
@@ -131,7 +147,7 @@ namespace Galaxy.Environments
               int qq = rnd.Next(enemyList.Count);
 
               var target = enemyList[qq].Position;
-              enemyBullet.Position = new Point(target.X, target.Y + 10);
+              enemyBullet.Position = new Point(target.X, target.Y+10);
 
               enemyBullet.Load();
 

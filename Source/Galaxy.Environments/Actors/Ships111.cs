@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 using Galaxy.Core.Actors;
 using Galaxy.Core.Environment;
 
@@ -6,17 +7,32 @@ namespace Galaxy.Environments.Actors
 {
     public class Ships111 : Ship
     {
+        public EnemyBullet CreateBullet()
+        {
+            EnemyBullet enemyBullet = new EnemyBullet(Info);
+            {
+                Position = Position;
+            };
+
+            enemyBullet.Load();
+            return enemyBullet;
+        }
+        public override void h_changePosition()
+        {
+            Position = new Point(Position.X - 8, Position.Y);
+        }
+
         public Ships111(ILevelInfo info) : base(info)
         {
-            Width = Width+25;
-            Height = Height + 25;
+            Width = Width;
+            Height = Height;
             ActorType = ActorType.Enemy;
         }
 
         public override void Update()
         {
+            CreateBullet();
             base.Update();
-            EnemyBullet enemyBullet = new EnemyBullet(Info);
         }
         public override void Load()
         {

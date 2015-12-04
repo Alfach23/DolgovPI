@@ -21,17 +21,6 @@ namespace Galaxy.Environments.Actors
 
     #endregion
 
-      public EnemyBullet CreateBullet()
-      {
-          EnemyBullet enemyBullet = new EnemyBullet(Info);
-          {
-              Position = Position;
-          };
-
-          enemyBullet.Load();
-          return enemyBullet;
-      }
-
     #region Private fields
 
     private bool m_flying;
@@ -56,7 +45,6 @@ namespace Galaxy.Environments.Actors
     public override void Update()
     {
       base.Update();
-        CreateBullet();
 
       if (!IsAlive)
         return;
@@ -99,31 +87,31 @@ namespace Galaxy.Environments.Actors
 
     #region Private methods
 
-    private void h_changePosition()
-    {
-      Point playerPosition = Info.GetPlayerPosition();
+      public virtual void h_changePosition()
+      {
+          Point playerPosition = Info.GetPlayerPosition();
 
-      Vector distance = new Vector(playerPosition.X - Position.X, playerPosition.Y - Position.Y);
-      double coef = distance.X / MaxSpeed;
+          Vector distance = new Vector(playerPosition.X - Position.X, playerPosition.Y - Position.Y);
+          double coef = distance.X/MaxSpeed;
 
-      Vector movement = Vector.Divide(distance, coef);
+          Vector movement = Vector.Divide(distance, coef);
 
-      Size levelSize = Info.GetLevelSize();
+          Size levelSize = Info.GetLevelSize();
 
-      if(movement.X > levelSize.Width)
-        movement = new Vector(levelSize.Width, movement.Y);
+          if (movement.X > levelSize.Width)
+              movement = new Vector(levelSize.Width, movement.Y);
 
-      if(movement.X < 0 || double.IsNaN(movement.X))
-        movement = new Vector(0, movement.Y);
+          if (movement.X < 0 || double.IsNaN(movement.X))
+              movement = new Vector(0, movement.Y);
 
-      if(movement.Y > levelSize.Height)
-        movement = new Vector(movement.X, levelSize.Height);
+          if (movement.Y > levelSize.Height)
+              movement = new Vector(movement.X, levelSize.Height);
 
-      if(movement.Y < 0 ||  double.IsNaN(movement.Y))
-        movement = new Vector(movement.X, 0);
+          if (movement.Y < 0 || double.IsNaN(movement.Y))
+              movement = new Vector(movement.X, 0);
 
-      Position = new Point((int) (Position.X + movement.X), (int) (Position.Y + movement.Y));
-    }
+          Position = new Point((int) (Position.X + movement.X), (int) (Position.Y + movement.Y));
+      }
 
     #endregion
   }

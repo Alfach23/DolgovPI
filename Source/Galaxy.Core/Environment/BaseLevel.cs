@@ -61,7 +61,7 @@ namespace Galaxy.Core.Environment
             }
         }
 
-        public void Load()
+        public virtual void Load()
         {
             h_load();
 

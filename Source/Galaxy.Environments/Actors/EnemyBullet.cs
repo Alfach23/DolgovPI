@@ -21,8 +21,8 @@ namespace Galaxy.Environments.Actors
 
     public EnemyBullet(ILevelInfo info):base(info)
     {
-      Width = 3;
-      Height = 3;
+      Width = 5;
+      Height = 5;
       ActorType = ActorType.Enemy;
     }
 
@@ -37,7 +37,13 @@ namespace Galaxy.Environments.Actors
 
     public override void Update()
     {
-      Position = new Point(Position.X, Position.Y + Speed);
+      Position = new Point(Position.X, Position.Y);
+
+      var EndMap = Info.GetLevelSize();
+      if (Position.Y > EndMap.Height)
+      {
+          CanDrop = true;
+      }
     }
 
     #endregion
