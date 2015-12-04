@@ -101,7 +101,7 @@ namespace Galaxy.Environments
     {
       m_frameCount++;
       h_dispatchKey();
-      TimeEnemyBul();
+      t_TimeEnemyBul();
 
       base.Update();
 
@@ -133,7 +133,7 @@ namespace Galaxy.Environments
       //таймер
     //создать таймер, который будет выполнять проверку по времени.
     private Stopwatch BullShotTime = new Stopwatch();
-      private void TimeEnemyBul()
+      private void t_TimeEnemyBul()
       {
           
           if (BullShotTime.ElapsedMilliseconds < 2000)

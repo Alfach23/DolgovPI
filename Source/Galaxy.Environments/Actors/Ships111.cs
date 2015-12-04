@@ -18,7 +18,7 @@ namespace Galaxy.Environments.Actors
             return enemyBullet;
         }
 
-        public override void h_changePosition()
+        protected override void H_changePosition()
         {
             Position = new Point(Position.X - 8, Position.Y);
         }

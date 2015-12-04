@@ -55,12 +55,12 @@ namespace Galaxy.Environments.Actors
 
         m_flyTimer.Stop();
         m_flyTimer = null;
-        h_changePosition();
+        H_changePosition();
         m_flying = true;
       }
       else
       {
-        h_changePosition();
+        H_changePosition();
       }
     }
 
@@ -87,7 +87,7 @@ namespace Galaxy.Environments.Actors
 
     #region Private methods
 
-      public virtual void h_changePosition()
+      protected virtual void H_changePosition()
       {
           Point playerPosition = Info.GetPlayerPosition();
 

@@ -50,11 +50,11 @@ namespace Galaxy.Environments.Actors
         public override void Update()
         {
             base.Update();
-            h_changePosition();
+            H_changePosition();
         }
 
         #endregion
-        public void h_changePosition()
+        public void H_changePosition()
         {
             Position = new Point(Position.X + MaxSpeed, Position.Y - MaxSpeed);
         }
