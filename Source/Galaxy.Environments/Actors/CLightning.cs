@@ -10,7 +10,7 @@ using Galaxy.Core.Environment;
 
 namespace Galaxy.Environments.Actors
 {
-    class CLightning : BaseActor
+    class CLightning : DethAnimationActor
     {
         #region Constant
 
