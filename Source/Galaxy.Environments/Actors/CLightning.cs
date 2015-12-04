@@ -61,6 +61,7 @@ namespace Galaxy.Environments.Actors
 
         public override void Update()
         {
+            CanDrop = false;
             base.Update();
 
             if (!IsAlive)
@@ -82,7 +83,7 @@ namespace Galaxy.Environments.Actors
         }
 
         #endregion
-        public virtual void h_changePosition()
+        public void h_changePosition()
         {
             Position = new Point(Position.X+13, Position.Y + 4);
         }
