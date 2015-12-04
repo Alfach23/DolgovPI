@@ -12,11 +12,12 @@ namespace Galaxy.Environments.Actors
             EnemyBullet enemyBullet = new EnemyBullet(Info);
             {
                 Position = Position;
-            };
+            }
 
             enemyBullet.Load();
             return enemyBullet;
         }
+
         public override void h_changePosition()
         {
             Position = new Point(Position.X - 8, Position.Y);
@@ -29,11 +30,6 @@ namespace Galaxy.Environments.Actors
             ActorType = ActorType.Enemy;
         }
 
-        public override void Update()
-        {
-            CreateBullet();
-            base.Update();
-        }
         public override void Load()
         {
             Load(@"Assets/ship.png");
