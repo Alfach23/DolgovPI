@@ -53,14 +53,23 @@ namespace Galaxy.Environments
 
           Actors.Add(ship);
       }
+        
+        var BallLightning = new CLightning(this);
+        int positionbullY = BallLightning.Height + 10;
+        int positionbullX = BallLightning.Width + 50;
 
-      BullShotTime.Start();
+        BallLightning.Position = new Point(positionbullX, positionbullY);
+
+        Actors.Add(BallLightning);
+        
       // Player
       Player = new PlayerShip(this);
       int playerPositionX = Size.Width / 2 - Player.Width / 2;
       int playerPositionY = Size.Height - Player.Height - 50;
       Player.Position = new Point(playerPositionX, playerPositionY);
       Actors.Add(Player);
+
+      BullShotTime.Start();
     }
 
     #endregion

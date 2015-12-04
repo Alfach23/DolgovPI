@@ -89,10 +89,6 @@ namespace Galaxy.Environments.Actors
 
     public virtual void h_changePosition()
     {
-        //int speed = 8;
-
-        //Position = new Point(Position.X + speed, Position.Y);
-
         Point playerPosition = Info.GetPlayerPosition();
 
         Vector distance = new Vector(playerPosition.X - Position.X, playerPosition.Y - Position.Y);
