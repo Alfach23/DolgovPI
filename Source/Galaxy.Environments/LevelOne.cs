@@ -57,7 +57,7 @@ namespace Galaxy.Environments
 
         var BallLightning = new CLightning(this);
         int positionbullY = BallLightning.Height + 10;
-        int positionbullX = BallLightning.Width + 50;
+        int positionbullX = BallLightning.Width + 20;
 
         BallLightning.Position = new Point(positionbullX, positionbullY);
 

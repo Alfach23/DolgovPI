@@ -10,12 +10,11 @@ using Galaxy.Core.Environment;
 
 namespace Galaxy.Environments.Actors
 {
-    class CLightning : DethAnimationActor
+    class CLightning : BaseActor
     {
         #region Constant
 
-        private const int MaxSpeed = 3;
-        private const long StartFlyMs = 2000;
+        private const int MaxSpeed = 6;
 
         #endregion
 
@@ -43,49 +42,21 @@ namespace Galaxy.Environments.Actors
         public override void Load()
         {
             Load("Assets/ball_lightning.png");
-            InitTimer();
         }
-
-        protected void InitTimer()
-        {
-            if (m_flyTimer == null)
-            {
-                m_flyTimer = new Stopwatch();
-                m_flyTimer.Start();
-            }
-        }
-
         #endregion
 
         #region Overrides
 
         public override void Update()
         {
-            CanDrop = false;
             base.Update();
-
-            if (!IsAlive)
-                return;
-
-            if (!m_flying)
-            {
-                if (m_flyTimer.ElapsedMilliseconds <= StartFlyMs) return;
-
-                m_flyTimer.Stop();
-                m_flyTimer = null;
-                h_changePosition();
-                m_flying = true;
-            }
-            else
-            {
-                h_changePosition();
-            }
+            h_changePosition();
         }
 
         #endregion
         public void h_changePosition()
         {
-            Position = new Point(Position.X+13, Position.Y + 4);
+            Position = new Point(Position.X + MaxSpeed, Position.Y - MaxSpeed);
         }
     }
 }
