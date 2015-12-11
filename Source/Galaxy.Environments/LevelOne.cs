@@ -34,23 +34,23 @@ namespace Galaxy.Environments
       // Enemies
         for (int i = 0; i < 5; i++)
         {
-            Ship = new Ships111(this);
+            Ship = new Ship(this);
             Ship.Load();
             int positionY = Ship.Height + 10;
             int positionX = 150 + i*(Ship.Width + 50);
 
-            Ship.Position = new Point(positionX, positionY);
+            Ship.Position = new Point(positionX, positionY + 40);
 
             Actors.Add(Ship);
         }
 
         for (int i = 0; i < 5; i++)
         {
-            var ship = new Ship(this);
+            var ship = new Ships111(this);
             int positionY = ship.Height + 10;
             int positionX = 150 + i*(ship.Width + 50);
 
-            ship.Position = new Point(positionX, positionY + 40);
+            ship.Position = new Point(positionX, positionY);
 
             Actors.Add(ship);
         }
@@ -136,22 +136,17 @@ namespace Galaxy.Environments
       private void t_TimeEnemyBul()
       {
           
-          if (BullShotTime.ElapsedMilliseconds < 2000)
+          if (BullShotTime.ElapsedMilliseconds < 1000)
               return;
-
-          var enemyBullet = new EnemyBullet(this);
-          var enemyList = Actors.Where((actor) => actor is Ship || actor is Ships111).ToList();
+          
+          var enemyList = Actors.Where((actor) => actor is Ships111).ToList();
           if (enemyList.Count > 0)
           {
               Random rnd = new Random();
               int qq = rnd.Next(enemyList.Count);
-
-              var target = enemyList[qq].Position;
-              enemyBullet.Position = new Point(target.X, target.Y+10);
-
-              enemyBullet.Load();
-
-              Actors.Add(enemyBullet);
+              var target = enemyList[qq] as Ships111;
+              var pe = target.CreateBullet();
+              Actors.Add(pe);
 
               BullShotTime.Restart();
           }

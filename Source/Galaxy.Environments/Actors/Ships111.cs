@@ -9,10 +9,11 @@ namespace Galaxy.Environments.Actors
     {
         public EnemyBullet CreateBullet()
         {
-            EnemyBullet enemyBullet = new EnemyBullet(Info);
+            EnemyBullet enemyBullet = new EnemyBullet(Info)
             {
-                Position = Position;
-            }
+                Position = Position
+            };
+
 
             enemyBullet.Load();
             return enemyBullet;
