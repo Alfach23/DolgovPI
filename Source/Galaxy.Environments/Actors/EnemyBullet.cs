@@ -40,10 +40,15 @@ namespace Galaxy.Environments.Actors
       Position = new Point(Position.X, Position.Y + Speed);
 
       var EndMap = Info.GetLevelSize();
+      var IntersectionPlayer = Info.GetPlayerPosition();
       if (Position.Y > EndMap.Height)
       {
-          CanDrop = true;
+          CanDrop = true;         
       }
+      if (Position.Y == IntersectionPlayer.Y && Position.X == IntersectionPlayer.X)
+        {
+            CanDrop = true;
+        }
     }
 
     #endregion
