@@ -63,7 +63,7 @@ namespace Galaxy.Core.Actors
     {
       if (m_dethAnimation && m_dethTimer.ElapsedMilliseconds > DethTimeMs)
       {
-        CanDrop = true;
+        CanDrop = false;
       }
     }
 

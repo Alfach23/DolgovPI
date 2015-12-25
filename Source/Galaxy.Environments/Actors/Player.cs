@@ -1,5 +1,6 @@
 ﻿#region using
 
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Galaxy.Core.Actors;
@@ -14,7 +15,7 @@ namespace Galaxy.Environments.Actors
     #region Constant
 
     private const int Speed = 3;
-      private int LiveCount = 9;
+      private int LiveCount = 3;
 
     #endregion
 
@@ -56,13 +57,9 @@ namespace Galaxy.Environments.Actors
         get { return base.IsAlive; }
         set
         {
+            Trace.WriteLine(LiveCount);
             LiveCount--;
-            if (LiveCount == 6)
-                MessageBox.Show("Осталось 2 жизни");
-            if (LiveCount == 3)
-                MessageBox.Show("Осталось 1 жизни");
-            if (LiveCount == 0)
-                MessageBox.Show("Последний шанс");
+            MessageBox.Show(string.Format("Осталось жизней: {0}", LiveCount + 1));
             if (LiveCount < 0)
             {
                 CanDrop = true;

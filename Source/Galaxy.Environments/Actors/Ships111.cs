@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.Remoting.Channels;
 using Galaxy.Core.Actors;
 using Galaxy.Core.Environment;
 
@@ -21,7 +22,14 @@ namespace Galaxy.Environments.Actors
 
         protected override void H_changePosition()
         {
-            Position = new Point(Position.X - 8, Position.Y);
+            if (IsAlive)
+            {
+                Position = new Point(Position.X - 8, Position.Y);
+            }
+            else
+            {
+                Position = new Point(Position.X, Position.Y + 5);
+            }
         }
 
         public Ships111(ILevelInfo info) : base(info)

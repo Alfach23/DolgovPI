@@ -17,7 +17,7 @@ namespace Galaxy.Environments.Actors
     #region Constant
 
     private const int MaxSpeed = 3;
-    private const long StartFlyMs = 2000;
+    private const long StartFlyMs = 1000;
 
     #endregion
 
@@ -45,22 +45,27 @@ namespace Galaxy.Environments.Actors
     public override void Update()
     {
       base.Update();
-
-      if (!IsAlive)
-        return;
+        
+      //if (!IsAlive)
+      //  return;
 
       if (!m_flying)
       {
-        if (m_flyTimer.ElapsedMilliseconds <= StartFlyMs) return;
+          if (m_flyTimer.ElapsedMilliseconds <= StartFlyMs) return;
 
-        m_flyTimer.Stop();
-        m_flyTimer = null;
-        H_changePosition();
-        m_flying = true;
+          m_flyTimer.Stop();
+          m_flyTimer = null;
+          H_changePosition();
+          m_flying = true;
       }
       else
       {
-        H_changePosition();
+          H_changePosition();
+          var EndMap = Info.GetLevelSize();
+          if (Position.Y > EndMap.Height)
+          {
+              CanDrop = true;
+          }
       }
     }
 
@@ -89,28 +94,35 @@ namespace Galaxy.Environments.Actors
 
       protected virtual void H_changePosition()
       {
-          Point playerPosition = Info.GetPlayerPosition();
+          if (IsAlive)
+          {
+              Point playerPosition = Info.GetPlayerPosition();
 
-          Vector distance = new Vector(playerPosition.X - Position.X, playerPosition.Y - Position.Y);
-          double coef = distance.X/MaxSpeed;
+              Vector distance = new Vector(playerPosition.X - Position.X, playerPosition.Y - Position.Y);
+              double coef = distance.X / MaxSpeed;
 
-          Vector movement = Vector.Divide(distance, coef);
+              Vector movement = Vector.Divide(distance, coef);
 
-          Size levelSize = Info.GetLevelSize();
+              Size levelSize = Info.GetLevelSize();
 
-          if (movement.X > levelSize.Width)
-              movement = new Vector(levelSize.Width, movement.Y);
+              if (movement.X > levelSize.Width)
+                  movement = new Vector(levelSize.Width, movement.Y);
 
-          if (movement.X < 0 || double.IsNaN(movement.X))
-              movement = new Vector(0, movement.Y);
+              if (movement.X < 0 || double.IsNaN(movement.X))
+                  movement = new Vector(0, movement.Y);
 
-          if (movement.Y > levelSize.Height)
-              movement = new Vector(movement.X, levelSize.Height);
+              if (movement.Y > levelSize.Height)
+                  movement = new Vector(movement.X, levelSize.Height);
 
-          if (movement.Y < 0 || double.IsNaN(movement.Y))
-              movement = new Vector(movement.X, 0);
+              if (movement.Y < 0 || double.IsNaN(movement.Y))
+                  movement = new Vector(movement.X, 0);
 
-          Position = new Point((int) (Position.X + movement.X), (int) (Position.Y + movement.Y));
+              Position = new Point((int)(Position.X + movement.X), (int)(Position.Y + movement.Y));
+          }
+          else
+          {
+              Position = new Point(Position.X, Position.Y + MaxSpeed);
+          }
       }
 
     #endregion

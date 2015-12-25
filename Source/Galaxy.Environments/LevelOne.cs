@@ -105,7 +105,7 @@ namespace Galaxy.Environments
 
       base.Update();
 
-      IEnumerable<BaseActor> killedActors = CollisionChecher.GetAllCollisions(Actors);
+      IEnumerable<BaseActor> killedActors = CollisionChecher.GetAllCollisions(Actors.Where((actor)=>actor.IsAlive).ToList());// отфильтровал уже убитых врагов. 
 
       foreach (BaseActor killedActor in killedActors)
       {
@@ -139,7 +139,7 @@ namespace Galaxy.Environments
           if (BullShotTime.ElapsedMilliseconds < 1000)
               return;
           
-          var enemyList = Actors.Where((actor) => actor is Ships111).ToList();
+          var enemyList = Actors.Where((actor) => actor is Ships111 && actor.IsAlive).ToList();
           if (enemyList.Count > 0)
           {
               Random rnd = new Random();

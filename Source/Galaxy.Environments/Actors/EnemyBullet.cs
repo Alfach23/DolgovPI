@@ -37,20 +37,25 @@ namespace Galaxy.Environments.Actors
 
     public override void Update()
     {
-      Position = new Point(Position.X, Position.Y + Speed);
+        GetPosi();
+    }
 
-      var EndMap = Info.GetLevelSize();
-      var IntersectionPlayer = Info.GetPlayerPosition();
-      if (Position.Y > EndMap.Height)
-      {
-          CanDrop = true;         
-      }
-      if (Position.Y == IntersectionPlayer.Y && Position.X == IntersectionPlayer.X)
+    private void GetPosi()
+    {
+        Position = new Point(Position.X, Position.Y + Speed);
+
+        var EndMap = Info.GetLevelSize();
+        var IntersectionPlayer = Info.GetPlayerPosition();
+        if (Position.Y > EndMap.Height)
+        {
+            CanDrop = true;
+        }
+        if (Position.Y == IntersectionPlayer.Y && Position.X == IntersectionPlayer.X)
         {
             CanDrop = true;
         }
     }
 
-    #endregion
+        #endregion
   }
 }
