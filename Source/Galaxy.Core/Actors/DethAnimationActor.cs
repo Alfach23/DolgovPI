@@ -1,6 +1,7 @@
 #region using
 
 using System.Diagnostics;
+using System.Drawing;
 using Galaxy.Core.Environment;
 
 #endregion
@@ -73,6 +74,11 @@ namespace Galaxy.Core.Actors
       m_dethTimer.Start();
       Load(@"Assets\deth.png");
     }
+
+      protected virtual void H_changePosition()
+      {
+          Position = new Point(Position.X, Position.Y + 4);
+      }
 
     #endregion
   }

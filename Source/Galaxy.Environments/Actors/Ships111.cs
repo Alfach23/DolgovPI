@@ -28,7 +28,7 @@ namespace Galaxy.Environments.Actors
             }
             else
             {
-                Position = new Point(Position.X, Position.Y + 5);
+                base.H_changePosition();
             }
         }
 

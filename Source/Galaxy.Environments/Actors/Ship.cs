@@ -92,7 +92,7 @@ namespace Galaxy.Environments.Actors
 
     #region Private methods
 
-      protected virtual void H_changePosition()
+      protected override void H_changePosition()
       {
           if (IsAlive)
           {
@@ -121,7 +121,7 @@ namespace Galaxy.Environments.Actors
           }
           else
           {
-              Position = new Point(Position.X, Position.Y + MaxSpeed);
+              base.H_changePosition();
           }
       }
 
