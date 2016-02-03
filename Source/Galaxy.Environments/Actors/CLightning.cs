@@ -58,5 +58,17 @@ namespace Galaxy.Environments.Actors
         {
             Position = new Point(Position.X + MaxSpeed, Position.Y - MaxSpeed);
         }
+        public override bool IsAlive
+        {
+            get
+            {
+                return base.IsAlive;
+            }
+            set
+            {
+                base.IsAlive = true;
+                CanDrop = false;
+            }
+        }
     }
 }
